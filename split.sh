@@ -1,3 +1,5 @@
+#!/bin/sh
+
 for i in `seq 0 1 130`
 do
 let "a=6+$i*2001"

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 awk '{print $1}' nDOS0 >e
 for i in `seq 1 1 130`
 do
