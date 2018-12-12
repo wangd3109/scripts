@@ -10,8 +10,8 @@ echo  $i $a $b
 sed -n "$a,$b p" DOSCAR >0DOS$i		# 截取指定行
 sed  '1d' 0DOS$i >1DOS$i 		# delete the first line
 done
-#awk '{print $1-$fermi}' 1DOS0 >e
-awk '{print $1-1.81661968}' 1DOS0 >e	# 调整费米能级
+awk -v f="$fermi" '{print $1-f}' 1DOS0 >e
+#awk '{print $1-1.81661968}' 1DOS0 >e	# 调整费米能级
 
 for i in `seq 0 1 130`
 do
@@ -32,6 +32,4 @@ awk '{print $1*10^$2}' dDOS$i >d4DOS$i
 paste e s4DOS$i p4DOS$i d4DOS$i> nDOS$i
 done
 
-#rm 1DOS* 2DOS* 3DOS* tmp* s4* p4* d4* 0DOS* sDOS* pDOS* dDOS*
-
-#awk '{print $1-$fermi}' DOSCAR >e
+rm [0-3]DOS* [spd]DOS* [spd]4DOS* tmp*
