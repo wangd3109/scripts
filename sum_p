@@ -23,3 +23,5 @@ done
 	paste e Sr2 >nSr
 	paste e Co2 >nCo
 	paste e total2 >ntotal_p
+
+	rm [1-9]*
