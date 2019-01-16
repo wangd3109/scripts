@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 fermi=$(awk 'NR==6{print $4}' DOSCAR)
 nedos=$(awk 'NR==6{print $3}' DOSCAR)
 
