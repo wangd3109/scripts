@@ -1,0 +1,46 @@
+#!/bin/sh
+fermi=$(awk 'NR==6{print $4}' DOSCAR)
+nedos=$(awk 'NR==6{print $3}' DOSCAR)
+
+for i in `seq 0 1 130`
+do
+	let "a=6+($i*($nedos+1))"
+	let "b=6+$nedos+$i*($nedos+1)"
+echo  $i $a $b
+sed -n "$a,$b p" DOSCAR >0DOS$i		# 截取指定行
+sed  '1d' 0DOS$i >1DOS$i 		# delete the first line
+done
+awk -v f="$fermi" '{print $1-f}' 1DOS0 >e
+#awk '{print $1-1.81661968}' 1DOS0 >e	# 调整费米能级
+
+for i in `seq 0 1 130`
+do
+awk '{$1="";print $0}' 1DOS$i >2DOS$i	# 删除首列
+awk '{print $1, $2, $3, $4, $5, $6}' 2DOS$i >3DOS$i	# 指定spd轨道的三个总态密度
+#awk '{print $1+$2, $3+$4, $5+$6}' 2DOS$i >3DOS$i # spin up + spin down, the total dos for s p d orbitals, repectively
+cut -b 1-6 3DOS$i > tmp1 # s up
+cut -b 8-10 3DOS$i > tmp2
+cut -b 12-17 3DOS$i >tmp3 # s down
+cut -b 19-21 3DOS$i >tmp4
+cut -b 23-28 3DOS$i >tmp5 # p up
+cut -b 30-32 3DOS$i > tmp6
+cut -b 34-39 3DOS$i> tmp7 # p down
+cut -b 41-43 3DOS$i> tmp8
+cut -b 45-50 3DOS$i> tmp9 # d up
+cut -b 52-54 3DOS$i>tmp10
+cut -b 56-61 3DOS$i>tmp11 # d down
+cut -b 63-65 3DOS$i>tmp12
+paste tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 tmp7 tmp8 tmp9 tmp10 tmp11 tmp12 > 4DOS$i
+awk '{print $1*10^$2}' 4DOS$i >5s_upDOS$i
+awk '{print $3*10^$4}' 4DOS$i >5s_dnDOS$i
+awk '{print $5*10^$6}' 4DOS$i >5p_upDOS$i
+awk '{print $7*10^$8}' 4DOS$i >5p_dnDOS$i
+awk '{print $9*10^$10}' 4DOS$i >5d_upDOS$i
+awk '{print $11*10^$12}' 4DOS$i >5d_dnDOS$i
+paste 5s_upDOS$i 5s_dnDOS$i 5p_upDOS$i 5p_dnDOS$i 5d_upDOS$i 5d_dnDOS$i >6DOS$i
+awk '{print $1+$2, $3+$4, $5+$6}' 6DOS$i >7DOS$i
+paste e  7DOS$i > nDOS$i
+done
+
+rm [0-7]DOS* [spd]DOS* [spd]4DOS* tmp* 5????DOS*
+
