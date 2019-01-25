@@ -1,8 +1,9 @@
 #!/bin/bash
 fermi=$(awk 'NR==6{print $4}' DOSCAR)
 nedos=$(awk 'NR==6{print $3}' DOSCAR)
+natom=$(awk 'NR==1{print $1}' DOSCAR)
 
-for i in `seq 0 1 130`
+for i in `seq 0 1 $natom`
 do
 	let "a=6+($i*($nedos+1))"
 	let "b=6+$nedos+$i*($nedos+1)"
