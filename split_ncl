@@ -14,7 +14,7 @@ done
 awk -v f="$fermi" '{print $1-f}' 1DOS0 >e
 #awk '{print $1-1.81661968}' 1DOS0 >e	# 调整费米能级
 
-for i in `seq 0 1 130`
+for i in `seq 0 1 $natom`
 do
 awk '{$1="";print $0}' 1DOS$i >2DOS$i	# 删除首列
 awk '{print $1, $5, $9}' 2DOS$i >3DOS$i	# 指定spd轨道的三个总态密度
