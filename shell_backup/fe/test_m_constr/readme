@@ -1,0 +1,5 @@
+测试不同M_CONSTR时用，包括
+建立spin-spiral的脚本create_moment.sh
+收集结果的脚本get_data.sh, get_ep.sh, get_m.sh
+提交任务脚本sub_sh
+INCAR示例

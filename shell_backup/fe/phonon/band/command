@@ -1,0 +1,2 @@
+awk '{print $1,$2,$2*4.13567}' band.dat > band_2.dat
+sed -i '' 's/  0/ /g' band_2.dat

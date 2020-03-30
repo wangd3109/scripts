@@ -1,0 +1,60 @@
+SYSTEM = fcc Fe
+
+start parameters
+ ISTART = 0
+ ICHARG = 2
+ ENCUT  = 500
+ LCHARG = T
+ LWAVE  = T
+
+Magnetism
+ ISPIN = 2
+ MAGMOM= 1.4678 0 0 1.4678 0 0 \
+-0.453581 1.39596 0 -0.453581 1.39596 0 \
+-1.18748 -0.86275 0 -1.18748 -0.86275 0 \
+1.18748 -0.862747 0 1.18748 -0.862747 0 \
+0.453578 1.39596 0 0.453578 1.39596 0 \
+-1.4678 0 0 -1.4678 0 0 \
+0.453528 -1.39598 0 0.453528 -1.39598 0 \
+1.18747 0.862764 0 1.18747 0.862764 0 \
+-1.18744 0.862804 0 -1.18744 0.862804 0 \
+-0.453576 -1.39596 0 -0.453576 -1.39596 0
+
+spin spiral
+# ISYM   = -1
+# MAGMOM = 3 0 0 
+ LNONCOLLINEAR = T
+# LASPH  = T
+# LSPIRAL= T
+# QSPIRAL= 0.3 0.3 0
+# ENINI  = 400
+
+ion parameters
+# IBRION = 2
+# NSW    = 200
+# ISIF   = 7
+
+convergence
+# EDIFF  = 1E-07
+ EDIFFG = -0.001
+ PREC   = HIGH
+ NELM = 200
+# ALGO = F
+
+dos ralated tags
+ ISMEAR = -5
+ SIGMA  = 0.1
+ LORBIT = 10
+
+#LDA+U tags
+# LDAU   = T
+# LDAUTYPE = 2
+# LDAUL  = -1 2 -1 
+# LDAUU  = 0 2.6 0  
+# LDAUJ  = 0 0.6 0 
+
+#ADDGRID = T
+#LREAL = F
+#NBANDS = 640
+
+constrain
